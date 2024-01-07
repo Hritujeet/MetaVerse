@@ -1,0 +1,13 @@
+{% extends "../base.html" %}
+{% block title %}Create Post | MetaVerse{% endblock title %}
+{% block body %}
+    <section style="flex-direction: column;">
+        <form class="form" action="/createPost" method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Create Your Post | <span style="color: grey;">Share Youw Moments with The world</span></h1>
+            <input type="text" name="content" class="content inpBox" placeholder="Content">
+            <input type="file" name="uploadImage" id="uploadImage" required>
+            <button class="btn login">Create Post</button>
+        </form>
+    </section>
+{% endblock body %}

@@ -1,0 +1,33 @@
+{% extends "../base.html" %}
+{% block title %}Your Feed | MetaVerse{% endblock title %}
+{% block body %}
+    <h1 style="text-align: center;">Your Feed | New posts to go through!</h1>
+    <p style="text-align: center;">Discover new places and people around the globe</p>
+    <section style="flex-direction: column;">
+        <div class="postContainer">
+            {% for p in posts %}
+            <div class="post">
+                <h3 class="postAuthor">@{{p.user.username}} |<span style="color: grey;"> Shared a post</span></h3>
+                <p>{{p.content}}</p>
+                <p style="color: grey;">{{p.views}} views</p>
+                {% load static %}
+                <a href="/post/{{p.id}}"><img class="postImg" src="/media/{{p.img}}" alt="postImg"></a>
+                <div class="postActions">
+                    <form style="padding:0; border: none;" action="/like" method='post' class="option">
+                        {% csrf_token %}
+                        <button style="cursor: pointer; background: none; outline: none; border:none;" type="submit"><img class="action" width="50" src={% static "img/like.png" %} alt=""></button>
+                        <input type="checkbox" name="like" id="like" checked value="{{p.id}}" style="display: none;"/>
+                        <p style="text-align: center;">{{p.likes}} likes</p>
+                    </form>
+                    <div class="option">
+                        <a style="text-align: center;" href="/post/{{p.id}}"><img class="action" src={% static "img/Comment.png" %} alt=""></a>
+                        <p style="text-align: center;">Post Comment</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </section>
+    
+{% endblock body %}

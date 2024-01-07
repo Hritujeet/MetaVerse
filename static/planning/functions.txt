@@ -1,0 +1,4 @@
+1 - Like and comment posts
+2 - follow accounts
+3 - create posts
+4 - create account with your own profile photos

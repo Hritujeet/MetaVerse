@@ -1,0 +1,51 @@
+{% extends "../base.html" %}
+{% block title %}{{p.content}} - post by @{{p.user.username}}| MetaVerse{% endblock title %}
+{% block body %}
+    <section style="flex-direction: column;">
+        <div class="postContainer">
+            <div class="post">
+                <h3 class="postAuthor">@{{p.user.username}} |<span style="color: grey;"> Shared a post</span></h3>
+                <p>{{p.content}}</p>
+                <p style="color: grey;">{{p.views}} views</p>
+                {% load static %}
+                <img class="postImgLg" src="/media/{{p.img}}" alt="postImgLg">
+                <div class="postActions">
+                    <form class="option" style="padding:0; border: none; display: flex; justify-content: center; align-items: center;" action="/like" method='post' class="option">
+                        {% csrf_token %}
+                        <div class="option">
+                            <button style="cursor: pointer; background: none; outline: none; border:none;" type="submit"><img class="action" width="50" src={% static "img/like.png" %} alt=""></button>
+                            <input type="checkbox" name="like" id="like" checked value="{{p.id}}" style="display: none;"/>
+                            <p style="text-align: center;">{{p.likes}} likes</p>
+                        </div>
+                    </form>
+    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="commentContainer">
+            <h1>Comments</h1>
+            <form class="form" style='display: flex; flex-direction: column; justify-content: center; align-items: center;' action="/post/{{p.id}}" method='post'>
+                {% csrf_token %}
+                <h1>Post Your Comment</h1>
+                <input type="text" name="comment" class="content inpBox" placeholder="Comment">
+                <input type="checkbox" name="post" id="post" checked value="{{p.id}}" style="display: none;"/>
+                <button class="btn login" style='width: auto;'>Post</button>
+            </form>
+        </div>
+
+        {% if allComments|length == 0 %}
+            <h1 style="text-align: center;">No comments Yet</h1>
+
+        {% else %}
+        <h1 style="color: grey;">{{allComments|length}} Comments</h1>
+        {% for comment in allComments %}
+        <div class="card commentItem">
+            <h1>@{{comment.user.username}}</h1>
+            <h3 style="color: grey;">{{comment.timestamp}}</h3>
+            <p>{{comment.content}}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </section>
+{% endblock body %}

@@ -1,0 +1,25 @@
+{% extends "../base.html" %}
+{% block title %}SignUp - Create Account | MetaVerse{% endblock title %}
+{% block body %}
+    <section>
+
+        <form class="form" style="width: 50vw; margin: auto;" action="/user/signup" method="post">
+            {% load static %}
+            <img style="margin-bottom: 2rem; align-self: center;" width='175' src={% static "img/logo.png" %} alt="">
+            <ul>
+                <li><p>Username should contain atleast 3 characters</p></li>
+                <li><p>Password should containe at least 8 characters</p></li>
+                <li><p>Ensure that your password is strong so as for security purposes</p></li>
+            </ul>
+            {% csrf_token %}
+            <input type="text" class="inpBox" name="fullname" id="fullname" placeholder="Fullname" required>
+            <input type="text" class="inpBox" name="username" id="fullname" placeholder="Username" required>    
+            <input type="password" class="inpBox" name="pass" id="pass" placeholder="Password" required>
+            <input type="password" class="inpBox" name="confpass" id="confpass" placeholder="Confirm Password" required>
+
+            <p style="color: grey;">By Signing Up, you become discoverable to all the users of this website
+            </p>
+            <button class="login btn">Create Account</button>
+        </form>
+    </section>
+{% endblock body %}

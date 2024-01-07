@@ -1,0 +1,32 @@
+{% extends "../base.html" %}
+{% block title %}@{{request.user.username}} | MetaVerse{% endblock title %}
+{% block body %}
+    <section style="flex-direction: column; align-items: center;">
+        <div class="form card">
+            <h1>{{request.user.first_name}}</h1>
+        <h3 style="color: grey;">@{{request.user.username}} - Joined on {{request.user.date_joined}}</h3>
+        </div>
+        <h1><A>Posts</A></h1>
+        {% for p in posts %}
+        <div class="post">
+            <h3 class="postAuthor">@{{p.user.username}}</h3>
+            <p>{{p.content}}</p>
+            <p style="color: grey;">{{p.views}} views</p>
+            {% load static %}
+            <a href="/post/{{p.id}}"><img class="postImg" src="/media/{{p.img}}" alt="postImg"></a>
+            <div class="postActions">
+                <form style="padding:0; border: none;" action="/like" method='post' class="option">
+                    {% csrf_token %}
+                    <button style="cursor: pointer; background: none; outline: none; border:none;" type="submit"><img class="action" width="50" src={% static "img/like.png" %} alt=""></button>
+                    <input type="checkbox" name="like" id="like" checked value="{{p.id}}" style="display: none;"/>
+                    <p style="text-align: center;">{{p.likes}} likes</p>
+                </form>
+                <div class="option">
+                    <a style="text-align: center;" href="/post/{{p.id}}"><img class="action" src={% static "img/Comment.png" %} alt=""></a>
+                    <p style="text-align: center;">12 comments</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock body %}

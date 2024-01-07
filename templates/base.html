@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="metaverse social-media python social django-app">
+    <meta name="description" content="MetaVerse is an online social-media website. Explore the globe with ease and in a secure environment">
+    {% load static %}
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+    {% block linkcss %}{% endblock linkcss %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <nav>
+        <div class="left">
+            {% load static %}
+            <a href="/"><img width="200" src={% static "img/logo.png" %} alt="" srcset=""></a>
+        </div>
+        <div class="right">
+            {% if request.user.is_anonymous %}
+            <a href="/user/login"><button class="btn login">LogIn</button></a>
+            <a href="/user/signup"><button class="btn signup">SignUp</button></a>
+
+            {% else %}
+            <a href="/user/logout"><button class="btn logout">Logout</button></a>
+            <a href="/createPost"><button class="btn login">Create Post</button></a>
+            <a href="/yourAccount"><button class="account">@{{request.user.username}}</button></a>
+            {% endif %}
+        </div>
+    </nav>
+    {% for message in messages %}
+    <div class="alert">
+        <span>{{message}}</span>
+    </div>
+    {% endfor %}
+    {% block body %}{% endblock body %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "../base.html" %}
+{% block title %}LogIn - Log in to your account | MetaVerse{% endblock title %}
+
+{% block body %}
+    <section>
+        <div class="leftSection">
+            {% load static %}
+            <img class="leftImg" src={% static "img/loginImg.jpg" %} alt="">
+        </div>
+    
+        <div class="rightSection">
+            <form class="form" action="/user/login" method="post">
+                {% csrf_token %}
+                <img style="margin-bottom: 2rem; align-self: center;" width='175' src={% static "img/logo.png" %} alt="">
+                <input type="text" name="username" class="inpBox" autocomplete="off" placeholder="Username" required>
+                <input type="password" name="pass" class="inpBox" autocomplete="off" placeholder="Password" required>
+                <button class="login btn">Login</button>
+            </form>
+            <p>Don't have an account?</p>
+            <a href="/user/signup"><button class="btn signup">Create One</button></a>
+        </div>
+    </section>
+{% endblock body %}

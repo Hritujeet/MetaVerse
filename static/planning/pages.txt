@@ -1,0 +1,8 @@
+1 - Feed Page
+2 - Post Page with Comment Section
+3 - Your account with your posts
+4 - Search Page to search accounts
+5 - Account's page to view Other's account
+
+7 - login, signup pages
+9 - User feedback
